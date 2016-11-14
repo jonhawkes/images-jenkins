@@ -65,5 +65,5 @@ docker-compose down
 
 #Push the new Jenkins image to Artifactory
 docker login wasliberty-liber8-docker.artifactory.swg-devops.com -u $USERNAME -p $PASSWORD
-docker tag liber8-jenkins:devil wasliberty-liber8-docker.artifactory.swg-devops.com/liber8-jenkins:latest
+docker tag liber8-jenkins:devel wasliberty-liber8-docker.artifactory.swg-devops.com/liber8-jenkins:latest
 docker push wasliberty-liber8-docker.artifactory.swg-devops.com/liber8-jenkins:latest
