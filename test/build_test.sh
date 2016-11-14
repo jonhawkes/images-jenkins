@@ -64,8 +64,6 @@ echo "Stopping the container"
 docker-compose down
 
 #Push the new Jenkins image to Artifactory
-docker images
-docker ps
 docker login wasliberty-liber8-docker.artifactory.swg-devops.com -u $USERNAME -p $PASSWORD
-docker tag jenkins:latest wasliberty-liber8-docker.artifactory.swg-devops.com/jenkins:latest
-docker push wasliberty-liber8-docker.artifactory.swg-devops.com/jenkins:latest
+docker tag liber8-jenkins:devil wasliberty-liber8-docker.artifactory.swg-devops.com/liber8-jenkins:latest
+docker push wasliberty-liber8-docker.artifactory.swg-devops.com/liber8-jenkins:latest
