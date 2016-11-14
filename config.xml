@@ -1,0 +1,178 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<hudson>
+  <!-- Where workspaces are checked out -->
+  <workspaceDir>/tmp/work/${ITEM_FULLNAME}</workspaceDir>
+
+  <primaryView>Dashboard</primaryView>
+  <!-- Views -->
+  <views>
+    <!-- All -->
+    <hudson.model.AllView>
+      <owner class="hudson" reference="../../.."/>
+      <name>All</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <properties class="hudson.model.View$PropertyList"/>
+    </hudson.model.AllView>
+
+    <!-- Dashboard view -->
+    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.9.7">
+      <owner class="hudson" reference="../../.."/>
+      <name>Dashboard</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <properties class="hudson.model.View$PropertyList"/>
+      <jobNames>
+        <comparator class="hudson.util.CaseInsensitiveComparator"/>
+      </jobNames>
+      <jobFilters>
+        <org.jenkinsci.plugins.orgfolder.github.BranchJobFilter plugin="github-organization-folder@1.3"/>
+      </jobFilters>
+      <columns>
+        <hudson.views.StatusColumn/>
+        <hudson.views.WeatherColumn/>
+        <hudson.views.JobColumn/>
+        <hudson.views.BuildButtonColumn/>
+      </columns>
+      <recurse>true</recurse>
+      <useCssStyle>false</useCssStyle>
+      <includeStdJobList>false</includeStdJobList>
+      <hideJenkinsPanels>false</hideJenkinsPanels>
+      <leftPortletWidth>50%</leftPortletWidth>
+      <rightPortletWidth>50%</rightPortletWidth>
+      <leftPortlets>
+        <hudson.plugins.view.dashboard.stats.StatBuilds>
+          <id>dashboard_portlet_dashboard_stats</id>
+          <name>Stats</name>
+        </hudson.plugins.view.dashboard.stats.StatBuilds>
+      </leftPortlets>
+      <rightPortlets>
+        <hudson.plugins.view.dashboard.core.UnstableJobsPortlet>
+          <id>dashboard_portlet_dashboard_shame</id>
+          <name>Jobs of shame</name>
+          <showOnlyFailedJobs>true</showOnlyFailedJobs>
+          <recurse>false</recurse>
+        </hudson.plugins.view.dashboard.core.UnstableJobsPortlet>
+      </rightPortlets>
+      <topPortlets>
+        <hudson.plugins.view.dashboard.core.JobsPortlet>
+          <id>dashboard_portlet_dashboard_jobs</id>
+          <name>Jobs</name>
+          <columnCount>2</columnCount>
+          <fillColumnFirst>false</fillColumnFirst>
+        </hudson.plugins.view.dashboard.core.JobsPortlet>
+      </topPortlets>
+      <bottomPortlets>
+        <hudson.plugins.view.dashboard.builds.LatestBuilds>
+          <id>dashboard_portlet_dashboard_builds</id>
+          <name>Latest builds</name>
+          <numBuilds>10</numBuilds>
+        </hudson.plugins.view.dashboard.builds.LatestBuilds>
+      </bottomPortlets>
+    </hudson.plugins.view.dashboard.Dashboard>
+
+    <!-- Organizations View -->
+    <listView>
+      <owner class="hudson" reference="../../.."/>
+      <name>Organizations</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <properties class="hudson.model.View$PropertyList"/>
+      <jobNames>
+        <comparator class="hudson.util.CaseInsensitiveComparator"/>
+      </jobNames>
+      <jobFilters>
+        <hudson.views.JobTypeFilter plugin="view-job-filters@1.27">
+          <includeExcludeTypeString>includeMatched</includeExcludeTypeString>
+          <jobType>jenkins.branch.OrganizationFolder.org.jenkinsci.plugins.github_branch_source.GitHubSCMNavigator</jobType>
+        </hudson.views.JobTypeFilter>
+      </jobFilters>
+      <columns>
+        <hudson.views.StatusColumn/>
+        <hudson.views.WeatherColumn/>
+        <hudson.views.JobColumn/>
+        <hudson.views.LastSuccessColumn/>
+        <hudson.views.LastFailureColumn/>
+        <hudson.views.LastDurationColumn/>
+        <hudson.views.BuildButtonColumn/>
+      </columns>
+      <recurse>false</recurse>
+    </listView>
+
+    <!-- Pull Requests view -->
+    <listView>
+      <owner class="hudson" reference="../../.."/>
+      <name>Pull Requests</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <properties class="hudson.model.View$PropertyList"/>
+      <jobNames>
+        <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../hudson.plugins.view.dashboard.Dashboard/jobNames/comparator"/>
+      </jobNames>
+      <jobFilters>
+        <org.jenkinsci.plugins.orgfolder.github.PullRequestJobFilter plugin="github-organization-folder@1.3"/>
+      </jobFilters>
+      <columns>
+        <hudson.views.StatusColumn/>
+        <hudson.views.WeatherColumn/>
+        <hudson.views.JobColumn/>
+        <hudson.views.LastDurationColumn/>
+      </columns>
+      <recurse>true</recurse>
+    </listView>
+  </views>
+
+  <!-- Set Pegdown as the default formatter -->
+  <markupFormatter class="org.jenkins_ci.plugins.pegdown_formatter.PegDownFormatter" plugin="pegdown-formatter@1.3">
+    <flags>262399</flags>
+    <extensions>
+      <org.jenkins__ci.plugins.pegdown__formatter.PegDownExtension>
+        <name>SUPPRESS_ALL_HTML</name>
+        <flag>196608</flag>
+        <selected>false</selected>
+      </org.jenkins__ci.plugins.pegdown__formatter.PegDownExtension>
+    </extensions>
+    <advancedExtensions>
+      <org.jenkins__ci.plugins.pegdown__formatter.PegDownExtension>
+        <name>ABBREVIATIONS</name>
+        <flag>4</flag>
+        <selected>true</selected>
+      </org.jenkins__ci.plugins.pegdown__formatter.PegDownExtension>
+      <org.jenkins__ci.plugins.pegdown__formatter.PegDownExtension>
+        <name>AUTOLINKS</name>
+        <flag>16</flag>
+        <selected>true</selected>
+      </org.jenkins__ci.plugins.pegdown__formatter.PegDownExtension>
+      <org.jenkins__ci.plugins.pegdown__formatter.PegDownExtension>
+        <name>DEFINITIONS</name>
+        <flag>64</flag>
+        <selected>true</selected>
+      </org.jenkins__ci.plugins.pegdown__formatter.PegDownExtension>
+      <org.jenkins__ci.plugins.pegdown__formatter.PegDownExtension>
+        <name>FENCED_CODE_BLOCKS</name>
+        <flag>128</flag>
+        <selected>true</selected>
+      </org.jenkins__ci.plugins.pegdown__formatter.PegDownExtension>
+      <org.jenkins__ci.plugins.pegdown__formatter.PegDownExtension>
+        <name>HARDWRAPS</name>
+        <flag>8</flag>
+        <selected>true</selected>
+      </org.jenkins__ci.plugins.pegdown__formatter.PegDownExtension>
+      <org.jenkins__ci.plugins.pegdown__formatter.PegDownExtension>
+        <name>NO_FOLLOW_LINKS</name>
+        <flag>262144</flag>
+        <selected>true</selected>
+      </org.jenkins__ci.plugins.pegdown__formatter.PegDownExtension>
+      <org.jenkins__ci.plugins.pegdown__formatter.PegDownExtension>
+        <name>SMARTYPANTS</name>
+        <flag>3</flag>
+        <selected>true</selected>
+      </org.jenkins__ci.plugins.pegdown__formatter.PegDownExtension>
+      <org.jenkins__ci.plugins.pegdown__formatter.PegDownExtension>
+        <name>TABLES</name>
+        <flag>32</flag>
+        <selected>true</selected>
+      </org.jenkins__ci.plugins.pegdown__formatter.PegDownExtension>
+    </advancedExtensions>
+  </markupFormatter>
+</hudson>
