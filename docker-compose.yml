@@ -1,0 +1,21 @@
+version: '2'
+services:
+  jenkins:
+    build: .
+    image: liber8-jenkins:devel
+    container_name: liber8-jenkins
+    env_file: docker.env
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      # Mount the external docker engine into the Jenkins container
+      - /var/run/docker.sock:/var/run/docker.sock
+      #
+      # Jenkins config will be persisted in here
+      #- c:/dev/liber8/test/temp/jenkins_home:/var/jenkins_home
+
+networks:
+  default:
+    external:
+      name: fabric_default
