@@ -46,7 +46,8 @@ while (($SECONDS < $starttime+30)) ; do
   break
   else
   echo "Jenkins is not up and running"
-  fi
+  sleep 3 
+ fi
 done
 
 #Test the logs output for a success
