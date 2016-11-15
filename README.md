@@ -1,4 +1,5 @@
 # Jenkins Pipeline Image
+[![Build Status](https://travis.ibm.com/liber8/images-jenkins.svg?token=SLEenfULapEFS7qrDAxj&branch=master)](https://travis.ibm.com/liber8/images-jenkins)
 
 This repository builds Jenkins in a Docker container. Administrative access to the Jenkins server is via IBM intranet password. You only need to log into the server in order to manually trigger builds or to change the server configuration. 
 
