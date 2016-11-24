@@ -126,6 +126,10 @@ class GhenkinsSetup
     return envOrgs.tokenize(',');
   }
 
+  public String githubRepoNamePattern() {
+    return System.getenv('GITHUB_REPO_PATTERN') ?: ".*";
+  }
+
   public String adminSshKey() {
     return System.getenv('ADMIN_SSH_KEY');
   }
@@ -325,9 +329,13 @@ class GhenkinsSetup
     hudson.security.ACL.impersonate(ACL.SYSTEM) {
       githubOrganizations().each { orgName ->
         def existingJob = Jenkins.instance.items.find { it.name == orgName };
+        log.info "  org: $orgName";
         if (existingJob == null) {
           def orgFolder = Jenkins.instance.createProject(OrganizationFolder.class, orgName);
           def navigator = new GitHubSCMNavigator(githubApiUrl(), orgName, "github-oauth-userpass", "SAME");
+          def pattern = githubRepoNamePattern()
+          log.info "  repo pattern: $pattern";
+          navigator.setPattern(pattern);
           orgFolder.getNavigators().push(navigator);
           orgFolder.save();
           orgFolder.scheduleBuild(10, new TimerTrigger.TimerTriggerCause());
