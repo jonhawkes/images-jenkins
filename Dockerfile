@@ -32,7 +32,7 @@ RUN curl -L "https://github.com/docker/compose/releases/download/1.8.1/docker-co
  && chmod +x /usr/local/bin/docker-compose
 
  # Install Cloud Foundry CLI (For Bluemix)
-RUN "cf install-plugin https://static-ice.ng.bluemix.net/ibm-containers-linux_x64" \
+RUN cf install-plugin https://static-ice.ng.bluemix.net/ibm-containers-linux_x64 \
  && curl "https://cli.run.pivotal.io/stable?release=linux64-binary&version=6.22.2&source=github-rel" > /usr/local/bin/cf-cli \
  && chmod +x /usr/local/bin/cf-cli
 
