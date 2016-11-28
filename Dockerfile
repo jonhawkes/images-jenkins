@@ -32,13 +32,13 @@ RUN curl -L "https://github.com/docker/compose/releases/download/1.8.1/docker-co
  && chmod +x /usr/local/bin/docker-compose
 
  # Install Cloud Foundry CLI (For Bluemix)
-RUN cf install-plugin https://static-ice.ng.bluemix.net/ibm-containers-linux_x64 \
- && curl "https://cli.run.pivotal.io/stable?release=linux64-binary&version=6.22.2&source=github-rel" > /usr/local/bin/cf-cli \
+RUN curl "https://cli.run.pivotal.io/stable?release=linux64-binary&version=6.22.2&source=github-rel" > /usr/local/bin/cf-cli \
  && chmod +x /usr/local/bin/cf-cli
 
  # Install Bluemix CLI
-RUN curl "http://public.dhe.ibm.com/cloud/bluemix/cli/bluemix-cli/Bluemix_CLI_0.4.4_amd64.tar.gz" > /usr/local/bin/bx-cli \
-&& chmod +x /usr/local/bin/cf-cli
+RUN cf install-plugin https://static-ice.ng.bluemix.net/ibm-containers-linux_x64 \
+ && curl "http://public.dhe.ibm.com/cloud/bluemix/cli/bluemix-cli/Bluemix_CLI_0.4.4_amd64.tar.gz" > /usr/local/bin/bx-cli \
+ && chmod +x /usr/local/bin/cf-cli
 
 # Install Jenkins plugins and their dependencies.
 RUN /usr/local/bin/install-plugins.sh \
