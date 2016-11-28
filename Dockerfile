@@ -19,7 +19,7 @@ RUN apt-get update \
 
 # Install Amalgam8
 RUN apt-get -y install python-pip \
- && pip install git+https://github.com/amalgam8/a8ctl 
+ && pip install git+https://github.com/amalgam8/a8ctl
 
 # Install Gradle 2.10
 RUN rm -rf /var/lib/apt/lists/* \
@@ -30,6 +30,15 @@ RUN rm -rf /var/lib/apt/lists/* \
 # Install Docker Compose
 RUN curl -L "https://github.com/docker/compose/releases/download/1.8.1/docker-compose-$(uname -s)-$(uname -m)" > /usr/local/bin/docker-compose \
  && chmod +x /usr/local/bin/docker-compose
+
+ # Install Cloud Foundry CLI (For Bluemix)
+RUN curl -L "https://cli.run.pivotal.io/stable?release=debian64&version=6.22.2&source=github-rel" > /usr/local/bin/cf-cli.deb \
+ && dpkg -i /usr/local/bin/cf-cli.deb && apt-get install -f
+
+ # Install Bluemix CLI
+RUN cf install-plugin -f https://static-ice.ng.bluemix.net/ibm-containers-linux_x64
+# && curl -L "http://public.dhe.ibm.com/cloud/bluemix/cli/bluemix-cli/Bluemix_CLI_0.4.4_amd64.tar.gz" > /usr/local/bin/bx-cli.tar.gz \
+# && chmod +x /usr/local/bin/cf-cli
 
 # Install Jenkins plugins and their dependencies.
 RUN /usr/local/bin/install-plugins.sh \
