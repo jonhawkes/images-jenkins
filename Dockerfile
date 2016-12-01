@@ -89,8 +89,7 @@ RUN /usr/local/bin/install-plugins.sh \
   blueocean \
 \
   # Handy meta tools
-  #favorite \
-  #Removed due to errors causing the first builds to fail when initially deployed
+  favorite \
   htmlpublisher \
   lockable-resources \
   parameterized-trigger \
