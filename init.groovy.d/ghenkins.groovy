@@ -152,7 +152,8 @@ class GhenkinsSetup
           githubUrl(),
           githubApiUrl(),
           githubAppId(),
-          githubAppSecret()
+          githubAppSecret(),
+          "read:org,user:email"
           );
 
       if(!realm.equals(Jenkins.instance.getSecurityRealm())) {
