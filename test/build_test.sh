@@ -58,6 +58,7 @@ docker logs liber8-jenkins 2>&1 | grep -qi 'Jenkins is fully up and running'
      echo "Test passed"
   else
      echo "Test failed"
+     exit 1
   fi
 
 #Bring down the container
