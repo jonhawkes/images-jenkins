@@ -27,7 +27,7 @@ sed -i -e 's/GITHUB_ADMINS=your.userid/GITHUB_ADMINS='${ADMIN}'/g' docker.env
 
 #Building the Jenkins image
 echo "Building the Jenkins image"
-docker build -t jenkins .
+docker build -t --no-cache jenkins .
 
 #Create the network
 docker network create fabric_default
