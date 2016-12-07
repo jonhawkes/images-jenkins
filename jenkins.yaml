@@ -1,0 +1,46 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: mn-jenkins-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        test: mnjenkins
+    spec:
+      containers:
+      - name: mnjenkins
+        image: mnjenkins
+        ports:
+          - containerPort: 8080
+        imagePullPolicy: Never
+        env:
+        - name: GITHUB_URL
+          value: https://github.ibm.com
+        - name: GITHUB_NAME
+          value: GitHub Enterprise
+        - name: JENKINS_EMAIL
+          value: mnuttall@uk.ibm.com
+        - name: JAVA_OPTS
+          value: -Xmx512m -Dfile.encoding=UTF-8 -Dhudson.security.ArtifactsPermission=true
+        - name: MAVEN_VERSION
+          value: 3.3.9
+        - name: GITHUB_REPO_PATTERN
+          value: .*
+        - name: GITHUB_APP_ID
+          value: 1f004845c43492ad77b6
+        - name: GITHUB_APP_SECRET
+          value: c67d3f2a210bd38b21088cdd38452e7137a7f9ae
+        - name: GITHUB_OAUTH_USER
+          value: MNUTTALL
+        - name: GITHUB_OAUTH_TOKEN
+          value: 758ea4d03776c84fd6074252f9d5a38b827efeea
+        - name: GITHUB_ADMINS
+          value: MNUTTALL
+        - name: GITHUB_ORGS
+          value: liber8-pipeline-test
+        - name: A8_REGISTRY_URL
+          value: http://registry:8080
+        - name: A8_CONTROLLER_URL
+          value: http://controller:8080
