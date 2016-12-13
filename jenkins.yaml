@@ -9,12 +9,19 @@ spec:
       labels:
         test: mnjenkins
     spec:
+      volumes:
+      - name: docker-sock
+        hostPath:
+          path: /var/run/docker.sock
       containers:
       - name: mnjenkins
         image: mnjenkins
         ports:
           - containerPort: 8080
         imagePullPolicy: Never
+        volumeMounts:
+        - mountPath: /var/run/docker.sock
+          name: docker-sock
         env:
         - name: GITHUB_URL
           value: https://github.ibm.com
@@ -29,9 +36,9 @@ spec:
         - name: GITHUB_REPO_PATTERN
           value: .*
         - name: GITHUB_APP_ID
-          value: 1f004845c43492ad77b6
+          value: 26d2ddf78db81183dc31
         - name: GITHUB_APP_SECRET
-          value: c67d3f2a210bd38b21088cdd38452e7137a7f9ae
+          value: 78beeea1e3b95b98316471154b136faf4e25161b
         - name: GITHUB_OAUTH_USER
           value: MNUTTALL
         - name: GITHUB_OAUTH_TOKEN
@@ -44,3 +51,20 @@ spec:
           value: http://registry:8080
         - name: A8_CONTROLLER_URL
           value: http://controller:8080
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    test: mnjenkins
+  name: mn-jenkins-service
+  namespace: default
+spec:
+  ports:
+  - nodePort: 31000
+    port: 8080
+  selector:
+    test: mnjenkins
+  type: NodePort
