@@ -30,7 +30,7 @@ echo "Building the Jenkins image"
 docker build --no-cache -t jenkins .
 
 #Create the network
-docker network create fabric_default
+docker network create fabriccompose_default
 
 #Run the jenkins image images
 echo "Deploying the image"
