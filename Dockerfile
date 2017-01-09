@@ -38,6 +38,12 @@ RUN curl -L "https://cli.run.pivotal.io/stable?release=debian64&version=6.22.2&s
 # Install Bluemix CLI
 RUN cf install-plugin -f https://static-ice.ng.bluemix.net/ibm-containers-linux_x64
 
+# Install kubectl
+RUN apt-get update \
+ && apt-get -y install curl \
+ && curl -L https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl \
+ && chmod +x /usr/local/bin/kubectl
+
 # Install Jenkins plugins and their dependencies.
 RUN /usr/local/bin/install-plugins.sh \
 \

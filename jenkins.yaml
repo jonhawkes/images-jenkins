@@ -1,0 +1,72 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: mn-jenkins-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        layer: build
+        touch-this: x
+    spec:
+      volumes:
+      - name: docker-sock
+        hostPath:
+          path: /var/run/docker.sock
+      containers:
+      - name: mnjenkins
+        image: mnjenkins
+        ports:
+          - containerPort: 8080
+        imagePullPolicy: Never
+        volumeMounts:
+        - mountPath: /var/run/docker.sock
+          name: docker-sock
+        env:
+        - name: GITHUB_URL
+          value: https://github.ibm.com
+        - name: GITHUB_NAME
+          value: GitHub Enterprise
+        - name: JENKINS_EMAIL
+          value: your.email@domain
+        - name: JAVA_OPTS
+          value: -Xmx512m -Dfile.encoding=UTF-8 -Dhudson.security.ArtifactsPermission=true
+        - name: MAVEN_VERSION
+          value: 3.3.9
+        - name: DOCKER_API_VERSION
+          value: 1.23.0
+        - name: GITHUB_REPO_PATTERN
+          value: .*
+        - name: GITHUB_APP_ID
+          value: your.app.id
+        - name: GITHUB_APP_SECRET
+          value: your.app.secret
+        - name: GITHUB_OAUTH_USER
+          value: YOUR.GITHUB.USERID
+        - name: GITHUB_OAUTH_TOKEN
+          value: your.oauth.token
+        - name: GITHUB_ADMINS
+          value: YOUR.GITHUB.USERID
+        - name: GITHUB_ORGS
+          value: liber8-pipeline-test
+        - name: A8_REGISTRY_URL
+          value: http://registry:8080
+        - name: A8_CONTROLLER_URL
+          value: http://controller:8080
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mn-jenkins-service
+  namespace: default
+spec:
+  ports:
+  - nodePort: 31000
+    port: 8080
+  selector:
+    layer: build
+  type: NodePort
