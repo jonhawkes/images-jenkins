@@ -29,7 +29,7 @@ spec:
         - name: GITHUB_NAME
           value: GitHub Enterprise
         - name: JENKINS_EMAIL
-          value: mnuttall@uk.ibm.com
+          value: your.email@domain
         - name: JAVA_OPTS
           value: -Xmx512m -Dfile.encoding=UTF-8 -Dhudson.security.ArtifactsPermission=true
         - name: MAVEN_VERSION
@@ -39,15 +39,15 @@ spec:
         - name: GITHUB_REPO_PATTERN
           value: .*
         - name: GITHUB_APP_ID
-          value: 26d2ddf78db81183dc31
+          value: your.app.id
         - name: GITHUB_APP_SECRET
-          value: 78beeea1e3b95b98316471154b136faf4e25161b
+          value: your.app.secret
         - name: GITHUB_OAUTH_USER
-          value: MNUTTALL
+          value: YOUR.GITHUB.USERID
         - name: GITHUB_OAUTH_TOKEN
-          value: 758ea4d03776c84fd6074252f9d5a38b827efeea
+          value: your.oauth.token
         - name: GITHUB_ADMINS
-          value: MNUTTALL
+          value: YOUR.GITHUB.USERID
         - name: GITHUB_ORGS
           value: liber8-pipeline-test
         - name: A8_REGISTRY_URL
