@@ -16,33 +16,10 @@ By default the server will automatically build all branches on all repositories 
 GITHUB_ORGS=liber8-pipeline-test
 ```
 
-If you need to log into the Jenkins server then you must add your authentification details into the docker.env file in this directory. Follow the [instructions on the GHEnkins page to setup the application id and user OAuth tokens](https://github.ibm.com/tron/ghenkins-docker#user-content-getting-the-application-id).
+If you need to build images-jenkins yourself you can do so: 
 
-  Add these values to the `docker.env` file:
-
-  App id and secret:
-  ```
-  GITHUB_APP_ID=
-  GITHUB_APP_SECRET=
-  ```
-
-  User OAuth user and token. The User can just be your GHE (shortname) id:
-  ```
-  GITHUB_OAUTH_USER=
-  GITHUB_OAUTH_TOKEN=
-  ```
-
-  Jenkins admin user id. Should be the same as your GHE (shortname) id:
-  ```
-  GITHUB_ADMINS=
-  ```
-
-Build the Jenkins image:
 ``` sh
 $ docker build -t jenkins .
 ```
 
-The Jenkins image will normally be started from the 'pipeline' project. However if you wish to run it from here you can:
-``` sh
-$ docker-compose up
-```
+See [pipeline](https://github.ibm.com/liber8/pipeline) for more instructions on the use of this component. 
