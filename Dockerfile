@@ -131,6 +131,9 @@ COPY config.xml /usr/share/jenkins/ref/config.xml
 COPY liber8-jenkins.sh /usr/local/bin/liber8-jenkins.sh
 RUN chmod +x /usr/local/bin/liber8-jenkins.sh
 
+COPY buildUtils.groovy /usr/local/bin/buildUtils.groovy
+COPY vaultUtils.groovy /usr/local/bin/buildUtils.groovy
+
 ENTRYPOINT ["/bin/tini", "--", "/usr/local/bin/liber8-jenkins.sh"]
 
 # EOF
