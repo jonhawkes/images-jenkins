@@ -2,8 +2,9 @@ def version='1.0'
 
 def mavenBuild(String ... args) {
   def mvnHome = tool 'M3'
-  sh "${mvnHome}/bin/mvn -B -DbuildId=$BUILD_ID " + args.join (' ')
-  sh "echo Build ID = $BUILD_ID"
+  def gitCommit = getCommitId()
+  sh "${mvnHome}/bin/mvn -B -DbuildId=${gitCommit} " + args.join (' ')
+  sh "echo Build ID = ${gitCommit}"
 }
 
 def mavenVerify () {
@@ -14,14 +15,20 @@ def mavenVerify () {
 }
 
 def pushToRepo(String serviceName) {
-  sh "docker tag " + serviceName + ":$BUILD_ID localhost:31500/" + serviceName + ":$BUILD_ID"
-  sh "docker tag " + serviceName + ":$BUILD_ID localhost:31500/" + serviceName + ":latest"
-  sh "docker push localhost:31500/" + serviceName + ":$BUILD_ID"
+  def gitCommit = getCommitId ()
+  sh "docker tag " + serviceName + ":${gitCommit} localhost:31500/" + serviceName + ":${gitCommit}"
+  sh "docker tag " + serviceName + ":${gitCommit} localhost:31500/" + serviceName + ":latest"
+  sh "docker push localhost:31500/" + serviceName + ":${gitCommit}"
   sh "docker push localhost:31500/" + serviceName + ":latest"
 }
 
 def deploy () {
   sh "kubectl apply -f manifests"
+}
+
+def getCommitId () {
+  sh 'git rev-parse --short HEAD > git.commit'
+  return readFile('git.commit').trim()
 }
 
 return this;
