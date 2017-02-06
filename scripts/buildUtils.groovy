@@ -18,8 +18,8 @@ def pushToRepo(String serviceName) {
   def gitCommit = getCommitId ()
   sh "docker tag " + serviceName + ":${gitCommit} localhost:${REGISRTY_PORT}/" + serviceName + ":${gitCommit}"
   sh "docker tag " + serviceName + ":${gitCommit} localhost:${REGISRTY_PORT}/" + serviceName + ":latest"
-  sh "docker push localhost:5000/" + serviceName + ":${gitCommit}"
-  sh "docker push localhost:5000/" + serviceName + ":latest"
+  sh "docker push localhost:${REGISRTY_PORT}/" + serviceName + ":${gitCommit}"
+  sh "docker push localhost:${REGISRTY_PORT}/" + serviceName + ":latest"
 }
 
 def deploy () {
