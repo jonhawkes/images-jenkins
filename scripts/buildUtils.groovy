@@ -16,10 +16,10 @@ def mavenVerify () {
 
 def pushToRepo(String serviceName) {
   def gitCommit = getCommitId ()
-  sh "docker tag " + serviceName + ":${gitCommit} localhost:${REGISRTY_PORT}/" + serviceName + ":${gitCommit}"
-  sh "docker tag " + serviceName + ":${gitCommit} localhost:${REGISRTY_PORT}/" + serviceName + ":latest"
-  sh "docker push localhost:${REGISRTY_PORT}/" + serviceName + ":${gitCommit}"
-  sh "docker push localhost:${REGISRTY_PORT}/" + serviceName + ":latest"
+  sh "docker tag " + serviceName + ":${gitCommit} localhost:${REGISTRY_PORT}/" + serviceName + ":${gitCommit}"
+  sh "docker tag " + serviceName + ":${gitCommit} localhost:${REGISTRY_PORT}/" + serviceName + ":latest"
+  sh "docker push localhost:${REGISTRY_PORT}/" + serviceName + ":${gitCommit}"
+  sh "docker push localhost:${REGISTRY_PORT}/" + serviceName + ":latest"
 }
 
 def deploy () {
