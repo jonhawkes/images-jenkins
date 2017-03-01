@@ -6,4 +6,5 @@ services:
   - docker
 
 script:
-  - cd test && ./build_test.sh
+  - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then bash ./test/build_test.sh; fi'
+  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then bash ./test/build_test.sh && upload.sh; fi'
