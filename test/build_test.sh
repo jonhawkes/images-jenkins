@@ -18,7 +18,6 @@
 
 #Copy credentials into docker.env file
 echo "Copying credential into docker.env file for Jenkins-GHE connectivity"
-cd ..
 sed -i -e 's/GITHUB_APP_ID=your.app.id/GITHUB_APP_ID='${APP_ID}'/g' docker.env
 sed -i -e 's/GITHUB_APP_SECRET=your.app.secret/GITHUB_APP_SECRET='${APP_SECRET}'/g' docker.env
 sed -i -e 's/GITHUB_OAUTH_USER=your.userid/GITHUB_OAUTH_USER='${OAUTH_USER}'/g' docker.env
