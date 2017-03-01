@@ -3,7 +3,7 @@ def version='1.0'
 def mavenBuild(String ... args) {
   def mvnHome = tool 'M3'
   def gitCommit = getCommitId()
-  sh "${mvnHome}/bin/mvn -B -DbuildId=${gitCommit} " + args.join (' ')
+  sh "${mvnHome}/bin/mvn -B -Dtag=${gitCommit} " + args.join (' ')
   sh "echo Build ID = ${gitCommit}"
 }
 
