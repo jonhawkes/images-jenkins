@@ -1,0 +1,12 @@
+<scriptApproval plugin="script-security@1.25">
+  <approvedScriptHashes/>
+  <approvedSignatures>
+    <string>staticField hudson.model.Result SUCCESS</string>
+  </approvedSignatures>
+  <aclApprovedSignatures/>
+  <approvedClasspathEntries/>
+  <pendingScripts/>
+  <pendingSignatures/>
+  <pendingClasspathEntries/>
+</scriptApproval>
+
