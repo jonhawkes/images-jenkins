@@ -106,7 +106,6 @@ RUN /usr/local/bin/install-plugins.sh \
 # Init and configuration
 COPY init.groovy.d/*.groovy /usr/share/jenkins/ref/init.groovy.d/
 COPY config.xml /usr/share/jenkins/ref/config.xml
-COPY scriptApproval.xml /usr/share/jenkins/ref/scriptApproval.xml
 
 COPY liber8-jenkins.sh /usr/local/bin/liber8-jenkins.sh
 RUN chmod +x /usr/local/bin/liber8-jenkins.sh
