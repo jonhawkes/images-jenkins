@@ -16,10 +16,17 @@ def mavenVerify () {
 
 def pushToRepo(String appName) {
   def gitCommit = getCommitId ()
-  sh "docker tag ${appName}:${gitCommit} ${REGISTRY}/${appName}:${gitCommit}"
-  sh "docker tag ${appName}:${gitCommit} ${REGISTRY}/${appName}:latest"
-  sh "docker push ${REGISTRY}/${appName}:${gitCommit}"
-  sh "docker push ${REGISTRY}/${appName}:latest"
+  def registryEnv = "${REGISTRY}"
+  def registry
+  if (registryEnv?.trim()) {
+    registry = "${registry}/"
+  } else {
+    registry = ""
+  }
+  sh "docker tag ${appName}:${gitCommit} ${registry}${appName}:${gitCommit}"
+  sh "docker tag ${appName}:${gitCommit} ${registry}${appName}:latest"
+  sh "docker push ${registry}${appName}:${gitCommit}"
+  sh "docker push ${registry}${appName}:latest"
 }
 
 def dockerBuild(String appName) {
