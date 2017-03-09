@@ -18,7 +18,6 @@
 
 #Copy credentials into docker.env file
 echo "Copying credential into docker.env file for Jenkins-GHE connectivity"
-cd ..
 sed -i -e 's/GITHUB_APP_ID=your.app.id/GITHUB_APP_ID='${APP_ID}'/g' docker.env
 sed -i -e 's/GITHUB_APP_SECRET=your.app.secret/GITHUB_APP_SECRET='${APP_SECRET}'/g' docker.env
 sed -i -e 's/GITHUB_OAUTH_USER=your.userid/GITHUB_OAUTH_USER='${OAUTH_USER}'/g' docker.env
@@ -64,8 +63,3 @@ docker logs liber8-jenkins 2>&1 | grep -qi 'Jenkins is fully up and running'
 #Bring down the container
 echo "Stopping the container"
 docker-compose down
-
-#Push the new Jenkins image to Artifactory
-docker login wasliberty-liber8-docker.artifactory.swg-devops.com -u $USERNAME -p $PASSWORD
-docker tag liber8-jenkins:devel wasliberty-liber8-docker.artifactory.swg-devops.com/liber8-jenkins:latest
-docker push wasliberty-liber8-docker.artifactory.swg-devops.com/liber8-jenkins:latest
