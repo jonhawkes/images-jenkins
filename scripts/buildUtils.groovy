@@ -20,8 +20,14 @@ def pushToRepo(String serviceName) {
   sh "docker push localhost:31500/" + serviceName + ":latest"
 }
 
+def dockerBuild(String appName) {
+  sh "docker build -t " + appName + " ."
+}
+
 def deploy () {
   sh "kubectl apply -f manifests"
 }
+
+
 
 return this;
