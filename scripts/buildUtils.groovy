@@ -4,7 +4,7 @@ def mavenBuild(String ... args) {
   def mvnHome = tool 'M3'
   def gitCommit = getCommitId()
   sh "${mvnHome}/bin/mvn -B -Dtag=${gitCommit} " + args.join (' ')
-  sh "echo Build ID = ${gitCommit}"
+  sh "echo Commit ID = ${gitCommit}"
 }
 
 def mavenVerify () {
@@ -14,12 +14,17 @@ def mavenVerify () {
   step([$class: 'ArtifactArchiver', artifacts: '**/target/failsafe-reports/test*-output.txt'])
 }
 
-def pushToRepo(String serviceName) {
+def pushToRepo(String appName) {
   def gitCommit = getCommitId ()
-  sh "docker tag " + serviceName + ":${gitCommit} ${REGISTRY}/" + serviceName + ":${gitCommit}"
-  sh "docker tag " + serviceName + ":${gitCommit} ${REGISTRY}/" + serviceName + ":latest"
-  sh "docker push ${REGISTRY}/" + serviceName + ":${gitCommit}"
-  sh "docker push ${REGISTRY}/" + serviceName + ":latest"
+  sh "docker tag ${appName}:${gitCommit} ${REGISTRY}/${appName}:${gitCommit}"
+  sh "docker tag ${appName}:${gitCommit} ${REGISTRY}/${appName}:latest"
+  sh "docker push ${REGISTRY}/${appName}:${gitCommit}"
+  sh "docker push ${REGISTRY}/${appName}:latest"
+}
+
+def dockerBuild(String appName) {
+  def gitCommit = getCommitId ()
+  sh "docker build -t ${appName}:${gitCommit} ."
 }
 
 def deploy () {
