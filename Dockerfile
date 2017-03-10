@@ -49,7 +49,6 @@ RUN /usr/local/bin/install-plugins.sh \
   script-security \
   ssh-credentials \
   ssh-slaves \
-  subversion \
   timestamper \
   translation \
   windows-slaves \
