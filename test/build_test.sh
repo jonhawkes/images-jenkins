@@ -26,7 +26,7 @@ sed -i -e 's/GITHUB_ADMINS=your.userid/GITHUB_ADMINS='${ADMIN}'/g' docker.env
 
 #Building the Jenkins image
 echo "Building the Jenkins image"
-docker build --no-cache -t jenkins .
+docker build --no-cache -t microservicebuilder-jenkins .
 
 #Create the network
 docker network create fabriccompose_default
@@ -52,7 +52,7 @@ done
 #Test the logs output for a success
 echo "Test the logs for the container"
 sleep 30
-docker logs liber8-jenkins 2>&1 | grep -qi 'Jenkins is fully up and running'
+docker logs microservicebuilder-jenkins 2>&1 | grep -qi 'Jenkins is fully up and running'
   if [[ $? == 0 ]]; then
      echo "Test passed"
   else
