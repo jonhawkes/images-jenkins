@@ -19,7 +19,7 @@ def pushToRepo(String appName) {
   def registryEnv = "${REGISTRY}"
   def registry
   if (registryEnv?.trim()) {
-    registry = "${registry}/"
+    registry = "${REGISTRY}/"
   } else {
     registry = ""
   }
