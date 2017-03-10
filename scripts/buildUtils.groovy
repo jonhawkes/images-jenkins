@@ -32,6 +32,7 @@ def pushToRepo(String appName) {
 def dockerBuild(String appName) {
   def gitCommit = getCommitId ()
   sh "docker build -t ${appName}:${gitCommit} ."
+  sh "find manifests -type f | xargs sed -i \'s/${appName}:latest/${appName}:${gitCommit}/g\'"
 }
 
 def deploy () {
