@@ -24,6 +24,13 @@ sed -i -e 's/GITHUB_OAUTH_USER=your.userid/GITHUB_OAUTH_USER='${OAUTH_USER}'/g' 
 sed -i -e 's/GITHUB_OAUTH_TOKEN=your.oauth.token/GITHUB_OAUTH_TOKEN='${OAUTH_TOKEN}'/g' docker.env
 sed -i -e 's/GITHUB_ADMINS=your.userid/GITHUB_ADMINS='${ADMIN}'/g' docker.env
 
+#Download the license zip file
+echo "Downloading the license zip"
+curl -u${USERNAME}:${PASSWORD} -O "https://na.artifactory.swg-devops.com/artifactory/wasliberty-liber8-generic/2017.01.beta/license/Text.zip"
+rm -r lafiles
+unzip Text.zip
+mv Text lafiles
+
 #Building the Jenkins image
 echo "Building the Jenkins image"
 docker build --no-cache -t microservicebuilder-jenkins .
