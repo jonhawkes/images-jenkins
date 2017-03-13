@@ -7,7 +7,7 @@ You can download a stable version of this image from Artifactory. You must first
 
 ```
 docker login wasliberty-liber8-docker.artifactory.swg-devops.com -u <IBM intranet ID> -p <IBM intranet password>
-docker pull --all-tags wasliberty-liber8-docker.artifactory.swg-devops.com/liber8-jenkins
+docker pull --all-tags wasliberty-liber8-docker.artifactory.swg-devops.com/microservicebuilder-jenkins
 ```
 
 By default the server will automatically build all branches on all repositories in the liber8-pipeline-test organisation. Add additional organisations by adding comma separated value to this entry in the `docker.env` file:

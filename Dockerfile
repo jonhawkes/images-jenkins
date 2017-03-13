@@ -106,12 +106,12 @@ RUN /usr/local/bin/install-plugins.sh \
 COPY init.groovy.d/*.groovy /usr/share/jenkins/ref/init.groovy.d/
 COPY config.xml /usr/share/jenkins/ref/config.xml
 
-COPY liber8-jenkins.sh /usr/local/bin/liber8-jenkins.sh
-RUN chmod +x /usr/local/bin/liber8-jenkins.sh
+COPY microservicebuilder-jenkins.sh /usr/local/bin/microservicebuilder-jenkins.sh
+RUN chmod +x /usr/local/bin/microservicebuilder-jenkins.sh
 
 RUN mkdir /scripts
 COPY scripts/buildUtils.groovy /scripts/buildUtils.groovy
 
-ENTRYPOINT ["/bin/tini", "--", "/usr/local/bin/liber8-jenkins.sh"]
+ENTRYPOINT ["/bin/tini", "--", "/usr/local/bin/microservicebuilder-jenkins.sh"]
 
 # EOF

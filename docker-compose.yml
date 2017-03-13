@@ -2,8 +2,8 @@ version: '2'
 services:
   jenkins:
     build: .
-    image: liber8-jenkins:devel
-    container_name: liber8-jenkins
+    image: microservicebuilder-jenkins:latest
+    container_name: microservicebuilder-jenkins
     env_file: docker.env
     ports:
       - "8080:8080"
