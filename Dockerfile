@@ -112,6 +112,9 @@ RUN chmod +x /usr/local/bin/microservicebuilder-jenkins.sh
 RUN mkdir /scripts
 COPY scripts/buildUtils.groovy /scripts/buildUtils.groovy
 
+# Copy the license files
+COPY lafiles /microservicebuilder/
+
 ENTRYPOINT ["/bin/tini", "--", "/usr/local/bin/microservicebuilder-jenkins.sh"]
 
 # EOF
