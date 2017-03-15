@@ -29,7 +29,7 @@ def dockerBuild(String appName) {
 
   // If yaml is deploying image:latest, change it to image:gitCommit
   // Also add ${registry} prefix. This is harmless if there is no registry.
-  sh "find manifests -type f | xargs sed -i \'s/${appName}:latest/${registry}${appName}:${gitCommit}/g\'"
+  sh "find manifests -type f | xargs sed -i \'s|${appName}:latest|${registry}${appName}:${gitCommit}|g\'"
 
 }
 
