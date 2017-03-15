@@ -14,25 +14,23 @@ def mavenVerify () {
   step([$class: 'ArtifactArchiver', artifacts: '**/target/failsafe-reports/test*-output.txt'])
 }
 
-def pushToRepo(String appName) {
-  def gitCommit = getCommitId ()
-  def registryEnv = "${REGISTRY}"
-  def registry
-  if (registryEnv?.trim()) {
-    registry = "${REGISTRY}/"
-  } else {
-    registry = ""
-  }
-  sh "docker tag ${appName}:${gitCommit} ${registry}${appName}:${gitCommit}"
-  sh "docker tag ${appName}:${gitCommit} ${registry}${appName}:latest"
-  sh "docker push ${registry}${appName}:${gitCommit}"
-  sh "docker push ${registry}${appName}:latest"
-}
-
 def dockerBuild(String appName) {
   def gitCommit = getCommitId ()
   sh "docker build -t ${appName}:${gitCommit} ."
-  sh "find manifests -type f | xargs sed -i \'s/${appName}:latest/${appName}:${gitCommit}/g\'"
+
+  def registry = "${REGISTRY}".trim()
+  if (registry) {
+    if (!registry.endsWith('/')) {
+      registry = "${registry}/"
+    }
+    sh "docker tag ${appName}:${gitCommit} ${registry}${appName}:${gitCommit}"
+    sh "docker push ${registry}${appName}:${gitCommit}"
+  }
+
+  // If yaml is deploying image:latest, change it to image:gitCommit
+  // Also add ${registry} prefix. This is harmless if there is no registry.
+  sh "find manifests -type f | xargs sed -i \'s/${appName}:latest/${registry}${appName}:${gitCommit}/g\'"
+
 }
 
 def deploy () {
