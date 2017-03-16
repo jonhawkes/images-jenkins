@@ -105,7 +105,6 @@ RUN /usr/local/bin/install-plugins.sh \
 # Init and configuration
 COPY init.groovy.d/*.groovy /usr/share/jenkins/ref/init.groovy.d/
 COPY config.xml /usr/share/jenkins/ref/config.xml
-COPY hudson.maven.MavenModuleSet.xml /usr/share/jenkins/ref/hudson.maven.MavenModuleSet.xml
 
 COPY microservicebuilder-jenkins.sh /usr/local/bin/microservicebuilder-jenkins.sh
 RUN chmod +x /usr/local/bin/microservicebuilder-jenkins.sh
