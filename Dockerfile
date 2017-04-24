@@ -22,9 +22,11 @@ RUN /usr/local/bin/install-plugins.sh \
   #antisamy-markup-formatter \
   #build-timeout \
   #
-  # NEXT: test credentials and cred-binding.
-  credentials \
-  credentials-binding \
+  # NEXT: test credentials and cred-binding. - Monday morning
+  #
+  #credentials \
+  #credentials-binding \
+  #
   #external-monitor-job \
   #email-ext \
   github-organization-folder \
@@ -45,18 +47,18 @@ RUN /usr/local/bin/install-plugins.sh \
   #timestamper \
   #translation \
   #windows-slaves \
-  #workflow-aggregator \
+  workflow-aggregator \
   #ws-cleanup \
 \
   # Allows logging in via GitHub
   github-oauth \
 \
   # Pipeline plugins
-  docker-workflow \
-  pipeline-utility-steps \
-  pipeline-maven \
-  pipeline-model-definition \
-  workflow-remote-loader \
+  #docker-workflow \
+  #pipeline-utility-steps \
+  #pipeline-maven \
+  #pipeline-model-definition \
+  #workflow-remote-loader \
 
 # Cutting everything out below here breaks ghenkins.groovy:192
 # embeddable-build-status is required. At least one other plugin is also required.
