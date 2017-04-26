@@ -11,98 +11,20 @@ ENV   GITHUB_NAME   GitHub Enterprise
 # Install Jenkins plugins and their dependencies.
 RUN /usr/local/bin/install-plugins.sh \
 \
-  # The first block of plugins are needed to make the
-  # "updates are available" message go away. Rebuild the container if
-  # that message comes back
+  # Install plugins required for git, github oauth, github-org, kubernetes and pipeline.
+  # Kubernetes integration from https://github.com/kubernetes/charts/stable/jenkins
+  # Some plugins are required to keep ghenkins.groovy happy.
   #
-  # MN currently removing as many as possible from this list.
-  # currently too many commented out: Jenkins comes up with no github integration.
-\
-  #ant \
-  #antisamy-markup-formatter \
-  #build-timeout \
-  #
-  # NEXT: test credentials and cred-binding. - Monday morning
-  #
-  #credentials \
-  #credentials-binding \
-  #
-  #external-monitor-job \
-  #email-ext \
+  credentials-binding:1.11 \
+  embeddable-build-status \
+  git:3.3.0 \
+  github-oauth \
   github-organization-folder \
-  #gradle \
-  #javadoc \
-  #junit \
-  #ldap \
-  #mailer \
-  # Something in this next block is vital to github-org kicking off. One or more of the first five. One or more of the first 3.
-  # one or both of the matrix- plugins are required.
+  kubernetes:0.11 \
+  lockable-resources \
   matrix-auth \
   matrix-project \
-  # pam-auth is not required. None of the plugins in the block below are required for github or login.
-  #pam-auth \
-  #script-security \
-  #ssh-credentials \
-  #ssh-slaves \
-  #timestamper \
-  #translation \
-  #windows-slaves \
-  workflow-aggregator \
-  #ws-cleanup \
-\
-  # Allows logging in via GitHub
-  github-oauth \
-\
-  # Pipeline plugins
-  #docker-workflow \
-  #pipeline-utility-steps \
-  #pipeline-maven \
-  #pipeline-model-definition \
-  #workflow-remote-loader \
-
-# Cutting everything out below here breaks ghenkins.groovy:192
-# embeddable-build-status is required. At least one other plugin is also required.
-\
-  # Build steps and parts
-  #envinject \
-  #slack \
-  #build-user-vars-plugin \
-#\
-  #ansicolor \
-  #modernstatus \
-\
-  # Removing embeddable-build-status breaks ghenkins.groovy:192
-  embeddable-build-status \
-\
-  # pegdown-formatter \
-  #buildtriggerbadge \      # These next 3 are not required
-  #config-file-provider \
-  #blueocean \
-#\
-  # Handy meta tools - deleting lockableresources breaks ghenkins.groovy:213
-  # Deleting just the first 3 has the same effect
-  # lockableresources is clearly used in ghenkins.groovy
-  #favorite \
-  #htmlpublisher \
-  lockable-resources
-  #parameterized-trigger \  # these next 3 are not required
-  #support-core \
-  #monitoring
-#\       ## Everything below here can be deleted
-  # Slaves/Pickles
-  #swarm \
-#\
-  # Analytics
-  #xunit \
-  #jacoco \
-  #pmd \
-  #findbugs \
-  #cucumber-reports \
-  #analysis-core \
-#\
-  # Views
-  #dashboard-view \
-  #view-job-filters
+  workflow-aggregator:2.5
 
 # Init and configuration
 COPY init.groovy.d/*.groovy /usr/share/jenkins/ref/init.groovy.d/
