@@ -1,17 +1,11 @@
 def version='1.0'
 
 def mavenBuild(String ... args) {
-  def mvnHome = tool 'M3'
-  def gitCommit = getCommitId()
-  sh "${mvnHome}/bin/mvn -B -Dtag=${gitCommit} " + args.join (' ')
-  sh "echo Commit ID = ${gitCommit}"
-}
-
-def mavenVerify () {
-  def mvnHome = tool 'M3'
-  sh "${mvnHome}/bin/mvn verify"
-  step([$class: 'JUnitResultArchiver', testResults: '**/target/failsafe-reports/TEST-*.xml'])
-  step([$class: 'ArtifactArchiver', artifacts: '**/target/failsafe-reports/test*-output.txt'])
+  withMaven(
+      maven: 'M3',
+      mavenLocalRepo: '.repository') {
+    sh "mvn -B " + args.join (' ')
+  }
 }
 
 def dockerBuild(String appName) {
@@ -29,7 +23,7 @@ def dockerBuild(String appName) {
 
   // If yaml is deploying image:latest, change it to image:gitCommit
   // Also add ${registry} prefix. This is harmless if there is no registry.
-  sh "find manifests -type f | xargs sed -i \'s/${appName}:latest/${registry}${appName}:${gitCommit}/g\'"
+  sh "find manifests -type f | xargs sed -i \'s|${appName}:latest|${registry}${appName}:${gitCommit}|g\'"
 
 }
 
