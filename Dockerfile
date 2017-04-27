@@ -1,4 +1,4 @@
-FROM jenkins:2.46.1
+FROM jenkins:2.46.2
 
 # Deleting this breaks the chmod +x below
 USER root
