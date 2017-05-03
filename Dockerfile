@@ -24,7 +24,8 @@ RUN /usr/local/bin/install-plugins.sh \
   lockable-resources \
   matrix-auth \
   matrix-project \
-  workflow-aggregator:2.5
+  workflow-aggregator:2.5 \
+  workflow-cps-global-lib:2.8
 
 # Init and configuration
 COPY init.groovy.d/*.groovy /usr/share/jenkins/ref/init.groovy.d/
@@ -32,9 +33,6 @@ COPY config.xml /usr/share/jenkins/ref/config.xml
 
 COPY microservicebuilder-jenkins.sh /usr/local/bin/microservicebuilder-jenkins.sh
 RUN chmod +x /usr/local/bin/microservicebuilder-jenkins.sh
-
-RUN mkdir /scripts
-COPY scripts/buildUtils.groovy /scripts/buildUtils.groovy
 
 # Copy the license files
 # COPY lafiles /microservicebuilder/
