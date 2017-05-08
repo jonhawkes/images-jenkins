@@ -309,7 +309,7 @@ class GhenkinsSetup
     log.info 'Configuring the Master node';
 
     hudson.security.ACL.impersonate(ACL.SYSTEM) {
-      Jenkins.instance.setNumExecutors(20);
+      Jenkins.instance.setNumExecutors(0);
       Jenkins.instance.setMode(hudson.model.Node.Mode.EXCLUSIVE);
       Jenkins.instance.save();
     }
