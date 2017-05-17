@@ -53,7 +53,7 @@ class GhenkinsSetup
     def ok = true;
     [
       'JENKINS_URL',
-      'JENKINS_EMAIL',
+      // 'JENKINS_EMAIL',
       'GITHUB_URL',
       'GITHUB_NAME',
       'GITHUB_APP_ID',
@@ -76,9 +76,11 @@ class GhenkinsSetup
     return System.getenv('JENKINS_URL');
   }
 
+  /*
   public String jenkinsEmail() {
     return System.getenv('JENKINS_EMAIL');
   }
+  */
 
   public String githubName() {
     return System.getenv('GITHUB_NAME');
@@ -138,7 +140,7 @@ class GhenkinsSetup
     log.info "Setting Jenkins location...";
     def location = jenkins.model.JenkinsLocationConfiguration.get();
     location.setUrl(jenkinsUrl());
-    location.setAdminAddress(jenkinsEmail());
+    // location.setAdminAddress(jenkinsEmail());
     location.save();
   }
 
