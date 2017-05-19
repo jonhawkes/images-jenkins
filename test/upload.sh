@@ -19,4 +19,6 @@
 #Push the new Jenkins image to Artifactory
 docker login wasliberty-liber8-docker.artifactory.swg-devops.com -u $USERNAME -p $PASSWORD
 docker tag microservicebuilder-jenkins:latest wasliberty-liber8-docker.artifactory.swg-devops.com/microservicebuilder-jenkins:latest
+docker tag microservicebuilder-jenkins:latest wasliberty-liber8-docker.artifactory.swg-devops.com/microservicebuilder-jenkins:$TRAVIS_BUILD_ID
 docker push wasliberty-liber8-docker.artifactory.swg-devops.com/microservicebuilder-jenkins:latest
+docker push wasliberty-liber8-docker.artifactory.swg-devops.com/microservicebuilder-jenkins:$TRAVIS_BUILD_ID
