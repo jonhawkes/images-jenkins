@@ -66,6 +66,15 @@ docker logs microservicebuilder-jenkins 2>&1 | grep -qi 'Jenkins is fully up and
      echo "Test failed"
      exit 1
   fi
+#Test that the plugins installed correctly
+echo "Test the logs to see "
+docker logs microservicebuilder-jenkins 2>&1 | grep -qi 'Failed Loading plugin'
+  if [[ $? == 0 ]]; then
+     echo "Test failed, some plugins failing to load"
+     exit 1
+  else
+     echo "Test passed"
+  fi
 
 #Bring down the container
 echo "Stopping the container"
