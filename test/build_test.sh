@@ -26,7 +26,7 @@ sed -i -e 's/GITHUB_ADMINS=your.userid/GITHUB_ADMINS='${ADMIN}'/g' docker.env
 
 #Download the license zip file
 echo "Downloading the license zip"
-curl -u${USERNAME}:${PASSWORD} -O "https://na.artifactory.swg-devops.com/artifactory/wasliberty-liber8-generic/2017.01.beta/license/Text.zip"
+curl -u${USERNAME}:${PASSWORD} -O "https://na.artifactory.swg-devops.com/artifactory/wasliberty-liber8-generic/1.0.0/license/Text.zip"
 rm -r lafiles
 unzip Text.zip
 mv Text lafiles
@@ -52,7 +52,7 @@ while (($SECONDS < $starttime+30)) ; do
   break
   else
   echo "Jenkins is not up and running"
-  sleep 3 
+  sleep 3
  fi
 done
 
