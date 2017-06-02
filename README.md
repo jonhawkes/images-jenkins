@@ -16,7 +16,7 @@ By default the server will automatically build all branches on all repositories 
 GITHUB_ORGS=liber8-pipeline-test
 ```
 
-If you need to build images-jenkins yourself you can do so: 
+If you need to build images-jenkins yourself you can do so:
 
 ``` sh
 $ docker build -t jenkins .
