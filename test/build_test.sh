@@ -47,7 +47,8 @@ echo "Test the HTTP port for a 200 response"
 sleep 50
 starttime=$SECONDS
 while (($SECONDS < $starttime+30)) ; do
-  if curl --output /dev/null --silent --head --fail "localhost:8080"; then
+  HTTP_RESPONSE=$(curl -i --silent --head "localhost:8080" | grep -e '^HTTP')
+  if [ $HTTP_RESPONSE = "HTTP/1.1 403 Forbidden" ]; then;
   echo "Jenkins is up and running"
   break
   else
