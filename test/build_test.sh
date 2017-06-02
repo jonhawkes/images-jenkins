@@ -62,6 +62,7 @@ done
 #Test the logs output for a success
 echo "Test the logs for the container"
 sleep 30
+docker logs microservicebuilder-jenkins 2>&1
 docker logs microservicebuilder-jenkins 2>&1 | grep -qi 'Jenkins is fully up and running'
   if [[ $? == 0 ]]; then
      echo "Test passed"
