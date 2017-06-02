@@ -16,6 +16,8 @@
 # limitations under the License.                                          #
 ###########################################################################
 
+set -x
+
 #Copy credentials into docker.env file
 echo "Copying credential into docker.env file for Jenkins-GHE connectivity"
 sed -i -e 's/GITHUB_APP_ID=your.app.id/GITHUB_APP_ID='${APP_ID}'/g' docker.env
@@ -43,7 +45,7 @@ echo "Deploying the image"
 docker-compose up -d
 
 #Test the image has been deployed via http response
-echo "Test the HTTP port for a 200 response"
+echo "Test the HTTP port for a 403 response"
 sleep 50
 starttime=$SECONDS
 while (($SECONDS < $starttime+30)) ; do
