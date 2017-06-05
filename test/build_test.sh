@@ -50,7 +50,7 @@ sleep 50
 starttime=$SECONDS
 while (($SECONDS < $starttime+30)) ; do
   HTTP_RESPONSE=$(curl -i --silent --head "localhost:8080" | grep -e '^HTTP')
-  echo "HTTP_RESPONSE=\`$HTTP_RESPONSE\`"
+  echo "HTTP_RESPONSE=\`"$HTTP_RESPONSE"\`"
   if [[ $HTTP_RESPONSE == "HTTP/1.1 403 Forbidden" ]]; then
   echo "Jenkins is up and running"
   break
@@ -63,14 +63,14 @@ done
 #Test the logs output for a success
 echo "Test the logs for the container"
 sleep 30
-docker logs microservicebuilder-jenkins 2>&1
-docker logs microservicebuilder-jenkins 2>&1 | grep -qi 'Jenkins is fully up and running'
+docker logs mb-jenkins 2>&1
+docker logs mb-jenkins 2>&1 | grep -qi 'Jenkins is fully up and running'
   if [[ $? == 0 ]]; then
      echo "Test passed"
   else
      echo "Test failed, could not find the message Jenkins is fully up and running"
      echo "Displaying logs from the jenkins container"
-     docker logs microservicebuilder-jenkins
+     docker logs mb-jenkins
      exit 1
   fi
 #Test that the plugins installed correctly
@@ -80,7 +80,7 @@ docker logs mb-jenkins 2>&1 | grep -qi 'Failed Loading plugin'
   if [[ $? == 0 ]]; then
      echo "Test failed, some plugins failing to load"
      echo "Displaying logs from the jenkins container"
-     docker logs microservicebuilder-jenkins
+     docker logs mb-jenkins
      exit 1
   else
      echo "Test passed"
