@@ -49,13 +49,12 @@ echo "Test the HTTP port for a 403 response"
 sleep 50
 starttime=$SECONDS
 while (($SECONDS < $starttime+30)) ; do
-  HTTP_RESPONSE=$(curl -i --silent --head "localhost:8080" | grep -e '^HTTP')
-  echo "HTTP_RESPONSE=\`"$HTTP_RESPONSE"\`"
-  if [[ $HTTP_RESPONSE == "HTTP/1.1 403 Forbidden" ]]; then
-  echo "Jenkins is up and running"
-  break
+  HTTP_RESPONSE=$(curl --write-out %{http_code} --silent --output /dev/null localhost:8080)
+  if [[ $HTTP_RESPONSE == "403" ]]; then
+    echo "Jenkins is up and running"
+    break
   else
-  echo "Jenkins is not up and running"
+    echo "Jenkins is not up and running: HTTP_RESPONSE=" $HTTP_RESPONSE
   sleep 3
  fi
 done
