@@ -50,7 +50,7 @@ sleep 50
 starttime=$SECONDS
 while (($SECONDS < $starttime+30)) ; do
   HTTP_RESPONSE=$(curl -i --silent --head "localhost:8080" | grep -e '^HTTP')
-  echo 'HTTP_RESPONSE=`$HTTP_RESPONSE`'
+  echo "HTTP_RESPONSE=\`$HTTP_RESPONSE\`"
   if [[ $HTTP_RESPONSE == "HTTP/1.1 403 Forbidden" ]]; then
   echo "Jenkins is up and running"
   break
