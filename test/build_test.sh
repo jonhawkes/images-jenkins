@@ -52,7 +52,7 @@ while (($SECONDS < $starttime+30)) ; do
   break
   else
   echo "Jenkins is not up and running"
-  sleep 3 
+  sleep 3
  fi
 done
 
@@ -63,7 +63,9 @@ docker logs microservicebuilder-jenkins 2>&1 | grep -qi 'Jenkins is fully up and
   if [[ $? == 0 ]]; then
      echo "Test passed"
   else
-     echo "Test failed"
+     echo "Test failed, could not find the message Jenkins is fully up and running"
+     echo "Displaying logs from the jenkins container"
+     docker logs microservicebuilder-jenkins
      exit 1
   fi
 #Test that the plugins installed correctly
@@ -71,6 +73,8 @@ echo "Test the logs to see "
 docker logs microservicebuilder-jenkins 2>&1 | grep -qi 'Failed Loading plugin'
   if [[ $? == 0 ]]; then
      echo "Test failed, some plugins failing to load"
+     echo "Displaying logs from the jenkins container"
+     docker logs microservicebuilder-jenkins
      exit 1
   else
      echo "Test passed"
