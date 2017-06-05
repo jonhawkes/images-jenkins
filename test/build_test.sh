@@ -59,7 +59,7 @@ done
 #Test the logs output for a success
 echo "Test the logs for the container"
 sleep 60
-docker logs microservicebuilder-jenkins 2>&1 | grep -qi 'Jenkins is fully up and running'
+docker logs mb-jenkins 2>&1 | grep -qi 'Jenkins is fully up and running'
   if [[ $? == 0 ]]; then
      echo "Test passed"
   else
@@ -69,8 +69,8 @@ docker logs microservicebuilder-jenkins 2>&1 | grep -qi 'Jenkins is fully up and
      exit 1
   fi
 #Test that the plugins installed correctly
-echo "Test the logs to see "
-docker logs microservicebuilder-jenkins 2>&1 | grep -qi 'Failed Loading plugin'
+echo "Test the logs to see if all plugins have installed correctly"
+docker logs mb-jenkins 2>&1 | grep -qi 'Failed Loading plugin'
   if [[ $? == 0 ]]; then
      echo "Test failed, some plugins failing to load"
      echo "Displaying logs from the jenkins container"
