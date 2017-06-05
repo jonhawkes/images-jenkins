@@ -26,14 +26,14 @@ sed -i -e 's/GITHUB_ADMINS=your.userid/GITHUB_ADMINS='${ADMIN}'/g' docker.env
 
 #Download the license zip file
 echo "Downloading the license zip"
-curl -u${USERNAME}:${PASSWORD} -O "https://na.artifactory.swg-devops.com/artifactory/wasliberty-liber8-generic/2017.01.beta/license/Text.zip"
+curl -u${USERNAME}:${PASSWORD} -O "https://na.artifactory.swg-devops.com/artifactory/wasliberty-liber8-generic/1.0.0/license/Text.zip"
 rm -r lafiles
 unzip Text.zip
 mv Text lafiles
 
 #Building the Jenkins image
 echo "Building the Jenkins image"
-docker build --no-cache -t microservicebuilder-jenkins .
+docker build --no-cache -t mb-jenkins .
 
 #Create the network
 docker network create fabriccompose_default
@@ -70,6 +70,7 @@ docker logs mb-jenkins 2>&1 | grep -qi 'Jenkins is fully up and running'
   fi
 #Test that the plugins installed correctly
 echo "Test the logs to see if all plugins have installed correctly"
+
 docker logs mb-jenkins 2>&1 | grep -qi 'Failed Loading plugin'
   if [[ $? == 0 ]]; then
      echo "Test failed, some plugins failing to load"
