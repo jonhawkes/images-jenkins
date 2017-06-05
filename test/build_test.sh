@@ -16,8 +16,6 @@
 # limitations under the License.                                          #
 ###########################################################################
 
-set -x
-
 #Copy credentials into docker.env file
 echo "Copying credential into docker.env file for Jenkins-GHE connectivity"
 sed -i -e 's/GITHUB_APP_ID=your.app.id/GITHUB_APP_ID='${APP_ID}'/g' docker.env
