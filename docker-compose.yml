@@ -2,8 +2,8 @@ version: '2'
 services:
   jenkins:
     build: .
-    image: microservicebuilder-jenkins:latest
-    container_name: microservicebuilder-jenkins
+    image: mb-jenkins:latest
+    container_name: mb-jenkins
     env_file: docker.env
     ports:
       - "8080:8080"
