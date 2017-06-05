@@ -46,7 +46,7 @@ docker-compose up -d
 echo "Test the HTTP port for a 200 response"
 sleep 50
 starttime=$SECONDS
-while (($SECONDS < $starttime+30)) ; do
+while (($SECONDS < $starttime+60)) ; do
   if curl --output /dev/null --silent --head --fail "localhost:8080"; then
   echo "Jenkins is up and running"
   break
@@ -58,7 +58,7 @@ done
 
 #Test the logs output for a success
 echo "Test the logs for the container"
-sleep 30
+sleep 40
 docker logs microservicebuilder-jenkins 2>&1 | grep -qi 'Jenkins is fully up and running'
   if [[ $? == 0 ]]; then
      echo "Test passed"
