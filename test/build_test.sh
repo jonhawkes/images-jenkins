@@ -26,14 +26,14 @@ sed -i -e 's/GITHUB_ADMINS=your.userid/GITHUB_ADMINS='${ADMIN}'/g' docker.env
 
 #Download the license zip file
 echo "Downloading the license zip"
-curl -u${USERNAME}:${PASSWORD} -O "https://na.artifactory.swg-devops.com/artifactory/wasliberty-liber8-generic/2017.01.beta/license/Text.zip"
+curl -u${USERNAME}:${PASSWORD} -O "https://na.artifactory.swg-devops.com/artifactory/wasliberty-liber8-generic/1.0.0/license/Text.zip"
 rm -r lafiles
 unzip Text.zip
 mv Text lafiles
 
 #Building the Jenkins image
 echo "Building the Jenkins image"
-docker build --no-cache -t microservicebuilder-jenkins .
+docker build --no-cache -t mb-jenkins .
 
 #Create the network
 docker network create fabriccompose_default
@@ -59,7 +59,7 @@ done
 #Test the logs output for a success
 echo "Test the logs for the container"
 sleep 30
-docker logs microservicebuilder-jenkins 2>&1 | grep -qi 'Jenkins is fully up and running'
+docker logs mb-jenkins 2>&1 | grep -qi 'Jenkins is fully up and running'
   if [[ $? == 0 ]]; then
      echo "Test passed"
   else
@@ -70,7 +70,7 @@ docker logs microservicebuilder-jenkins 2>&1 | grep -qi 'Jenkins is fully up and
   fi
 #Test that the plugins installed correctly
 echo "Test the logs to see "
-docker logs microservicebuilder-jenkins 2>&1 | grep -qi 'Failed Loading plugin'
+docker logs mb-jenkins 2>&1 | grep -qi 'Failed Loading plugin'
   if [[ $? == 0 ]]; then
      echo "Test failed, some plugins failing to load"
      echo "Displaying logs from the jenkins container"

@@ -83,7 +83,7 @@ COPY microservicebuilder-jenkins.sh /usr/local/bin/microservicebuilder-jenkins.s
 RUN chmod +x /usr/local/bin/microservicebuilder-jenkins.sh
 
 # Copy the license files
-# COPY lafiles /microservicebuilder/
+COPY lafiles /microservicebuilder/
 
 ENTRYPOINT ["/bin/tini", "--", "/usr/local/bin/microservicebuilder-jenkins.sh"]
 
