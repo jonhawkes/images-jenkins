@@ -31,7 +31,6 @@ class GhenkinsSetup
       setupLocation();
       setupSecurityRealm();
       setupAuthorizationStrategy();
-      setupAdmin();
       createUserPassCredential();
       createTokenCredential();
 
@@ -171,9 +170,8 @@ class GhenkinsSetup
 
     hudson.security.ACL.impersonate(ACL.SYSTEM) {
       def strategy = new hudson.security.GlobalMatrixAuthorizationStrategy();
-      strategy.add(hudson.model.Hudson.ADMINISTER, "ghenkins-admin");
       def organizations = githubOrganizations();
-      def orgs_plus = organizations + [ 'anonymous', 'authenticated' ];
+      def orgs_plus = organizations + [ 'authenticated' ];
 
       orgs_plus.each { user ->
         buildNewAccessList(user, [
@@ -212,18 +210,6 @@ class GhenkinsSetup
         Jenkins.instance.save();
       }
     }
-  }
-
-  public setupAdmin() {
-    // log.info "Setting up ghenkins-admin...";
-    // // TODO: This should generate the ssh public and private key if it doesn't exist already.
-    // hudson.security.ACL.impersonate(ACL.SYSTEM) {
-    //   def user = hudson.model.User.get('ghenkins-admin');
-    //   user.setFullName('Ghenkins Admin');
-    //   def keys = new org.jenkinsci.main.modules.cli.auth.ssh.UserPropertyImpl(adminSshKey());
-    //   user.addProperty(keys);
-    //   user.save();
-    // }
   }
 
   public StandardCredentials findCredentialsById(String id, Domain domain=Domain.global()) {
