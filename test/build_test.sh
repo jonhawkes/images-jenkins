@@ -44,35 +44,21 @@ docker-compose up -d
 
 #Test the image has been deployed via http response
 echo "Test the HTTP port for a 403 response"
-sleep 50
 starttime=$SECONDS
-while (($SECONDS < $starttime+30)) ; do
+while (($SECONDS < $starttime+90)) ; do
   HTTP_RESPONSE=$(curl --write-out %{http_code} --silent --output /dev/null localhost:8080)
-  if [[ $HTTP_RESPONSE == "403" ]]; then
-    echo "Jenkins is up and running"
-    break
+  docker logs mb-jenkins 2>&1 | grep -qi 'Jenkins is fully up and running'
+  if [[ $HTTP_RESPONSE == "403" &&  $? == 0 ]]; then
+      echo "Jenkins is up and running"
+      break
   else
-    echo "Jenkins is not up and running: HTTP_RESPONSE=" $HTTP_RESPONSE
-  sleep 3
+      echo "Jenkins is not up and running: HTTP_RESPONSE=" $HTTP_RESPONSE
+      sleep 10
  fi
 done
 
-#Test the logs output for a success
-echo "Test the logs for the container"
-sleep 30
-docker logs mb-jenkins 2>&1
-docker logs mb-jenkins 2>&1 | grep -qi 'Jenkins is fully up and running'
-  if [[ $? == 0 ]]; then
-     echo "Test passed"
-  else
-     echo "Test failed, could not find the message Jenkins is fully up and running"
-     echo "Displaying logs from the jenkins container"
-     docker logs mb-jenkins
-     exit 1
-  fi
 #Test that the plugins installed correctly
 echo "Test the logs to see if all plugins have installed correctly"
-
 docker logs mb-jenkins 2>&1 | grep -qi 'Failed Loading plugin'
   if [[ $? == 0 ]]; then
      echo "Test failed, some plugins failing to load"

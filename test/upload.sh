@@ -19,6 +19,6 @@
 #Push the new Jenkins image to Artifactory
 docker login wasliberty-liber8-docker.artifactory.swg-devops.com -u $USERNAME -p $PASSWORD
 docker tag mb-jenkins:latest wasliberty-liber8-docker.artifactory.swg-devops.com/mb-jenkins:latest
-docker tag mb-jenkins:latest wasliberty-liber8-docker.artifactory.swg-devops.com/mb-jenkins:$TRAVIS_BUILD_ID
+docker tag mb-jenkins:latest wasliberty-liber8-docker.artifactory.swg-devops.com/mb-jenkins:$TRAVIS_COMMIT
 docker push wasliberty-liber8-docker.artifactory.swg-devops.com/mb-jenkins:latest
-docker push wasliberty-liber8-docker.artifactory.swg-devops.com/mb-jenkins:$TRAVIS_BUILD_ID
+docker push wasliberty-liber8-docker.artifactory.swg-devops.com/mb-jenkins:$TRAVIS_COMMIT
