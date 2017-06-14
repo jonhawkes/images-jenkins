@@ -10,5 +10,5 @@ before_install:
   - sudo apt-get install unzip -y
 
 script:
-  - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then bash ./test/build_test.sh; fi'
-  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then bash ./test/build_test.sh && ./test/upload.sh; fi'
+  - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then bash ./test/build.sh; fi'
+  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then bash ./test/build.sh && ./test/upload.sh && ./test/download.sh; fi'
