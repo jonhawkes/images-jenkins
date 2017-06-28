@@ -32,7 +32,6 @@ RUN /usr/local/bin/install-plugins.sh \
     github-api:1.85 \
     github-branch-source:2.0.5 \
     github-oauth:0.27 \
-    github-organization-folder:1.6 \
     github:1.27.0 \
     handlebars:1.1 \
     icon-shim:2.0.3 \

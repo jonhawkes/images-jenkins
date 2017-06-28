@@ -16,9 +16,26 @@
 # limitations under the License.                                          #
 ###########################################################################
 
-#Push the new Jenkins image to Artifactory
-docker login wasliberty-liber8-docker.artifactory.swg-devops.com -u $USERNAME -p $PASSWORD
-docker tag mb-jenkins:latest wasliberty-liber8-docker.artifactory.swg-devops.com/mb-jenkins:latest
-docker tag mb-jenkins:latest wasliberty-liber8-docker.artifactory.swg-devops.com/mb-jenkins:$TRAVIS_COMMIT
-docker push wasliberty-liber8-docker.artifactory.swg-devops.com/mb-jenkins:latest
-docker push wasliberty-liber8-docker.artifactory.swg-devops.com/mb-jenkins:$TRAVIS_COMMIT
+#Remove local images
+function delete() {
+  docker rmi mb-jenkins:latest
+  docker rmi wasliberty-liber8-docker.artifactory.swg-devops.com/mb-jenkins:latest
+  docker rmi wasliberty-liber8-docker.artifactory.swg-devops.com/mb-jenkins:$TRAVIS_COMMIT
+}
+
+#Download latest images
+function pull() {
+  docker login wasliberty-liber8-docker.artifactory.swg-devops.com -u $USERNAME -p $PASSWORD
+  docker pull wasliberty-liber8-docker.artifactory.swg-devops.com/mb-jenkins:latest
+  docker pull wasliberty-liber8-docker.artifactory.swg-devops.com/mb-jenkins:$TRAVIS_COMMIT
+}
+
+#Test image with latest as tag
+delete
+pull
+#Tag image to test
+docker tag wasliberty-liber8-docker.artifactory.swg-devops.com/mb-jenkins:latest mb-jenkins:latest
+./test/test.sh
+#Test image with commit id as tag
+docker tag wasliberty-liber8-docker.artifactory.swg-devops.com/mb-jenkins:$TRAVIS_COMMIT mb-jenkins:latest
+./test/test.sh
