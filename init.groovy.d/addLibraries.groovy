@@ -24,6 +24,7 @@ class AddLibraries {
     def jenkinsInst = Jenkins.getInstance()
     def jenkinsDesc = jenkinsInst.getDescriptor("org.jenkinsci.plugins.workflow.libs.GlobalLibraries")
     jenkinsDesc.get().setLibraries([libconfig])
+    jenkinsDesc.save()
 
     log.info 'addLibraries complete'
 
