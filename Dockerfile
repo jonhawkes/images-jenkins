@@ -1,4 +1,4 @@
-FROM jenkins:2.60.1
+FROM jenkins:2.60.2
 
 # Deleting this breaks the chmod +x below
 USER root
@@ -17,7 +17,7 @@ RUN /usr/local/bin/install-plugins.sh \
   #
     ace-editor:1.1 \
     authentication-tokens:1.3 \
-    bouncycastle-api:2.16.1 \
+    bouncycastle-api:2.16.2 \
     branch-api:2.0.11 \
     cloudbees-folder:6.1.0 \
     credentials-binding:1.12 \
@@ -31,7 +31,7 @@ RUN /usr/local/bin/install-plugins.sh \
     git-server:1.7 \
     git:3.4.1 \
     github-api:1.86 \
-    github-branch-source:2.2.1 \
+    github-branch-source:2.2.2 \
     github-oauth:0.27 \
     github:1.27.0 \
     handlebars:1.1.1 \
