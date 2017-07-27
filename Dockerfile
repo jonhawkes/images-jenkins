@@ -50,26 +50,26 @@ RUN /usr/local/bin/install-plugins.sh \
     pipeline-graph-analysis:1.4 \
     pipeline-input-step:2.7 \
     pipeline-milestone-step:1.3.1 \
-    pipeline-model-api:1.1.8 \
+    pipeline-model-api:1.1.9 \
     pipeline-model-declarative-agent:1.1.1 \
-    pipeline-model-definition:1.1.8 \
-    pipeline-model-extensions:1.1.8 \
+    pipeline-model-definition:1.1.9 \
+    pipeline-model-extensions:1.1.9 \
     pipeline-rest-api:2.8 \
     pipeline-stage-step:2.2 \
-    pipeline-stage-tags-metadata:1.1.8 \
+    pipeline-stage-tags-metadata:1.1.9 \
     pipeline-stage-view:2.8 \
     plain-credentials:1.4 \
     scm-api:2.2.0 \
-    script-security:1.29.1 \
+    script-security:1.30 \
     ssh-credentials:1.13 \
     structs:1.9 \
     token-macro:2.1 \
     workflow-aggregator:2.5 \
-    workflow-api:2.18 \
+    workflow-api:2.19 \
     workflow-basic-steps:2.6 \
     workflow-cps-global-lib:2.8 \
-    workflow-cps:2.36.1 \
-    workflow-durable-task-step:2.12 \
+    workflow-cps:2.37 \
+    workflow-durable-task-step:2.13 \
     workflow-job:2.12.1 \
     workflow-multibranch:2.16 \
     workflow-scm-step:2.6 \
@@ -78,9 +78,10 @@ RUN /usr/local/bin/install-plugins.sh \
 
 # Init and configuration
 COPY init.groovy.d/*.groovy /usr/share/jenkins/ref/init.groovy.d/
-COPY config.xml /usr/share/jenkins/ref/config.xml
+COPY config.xml /usr/share/jenkins/ref/
+COPY jenkins.CLI.xml /usr/share/jenkins/ref/
 
-COPY microservicebuilder-jenkins.sh /usr/local/bin/microservicebuilder-jenkins.sh
+COPY microservicebuilder-jenkins.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/microservicebuilder-jenkins.sh
 
 # Copy the license files
